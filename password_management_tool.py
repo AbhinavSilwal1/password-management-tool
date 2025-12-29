@@ -81,7 +81,7 @@ def check_password():
 
 def generate_new_password():
     try:
-        length = int(length_entry.get())
+        length = length_slider.get()  # get the value from slider
         password = generate_password(length)
         gen_entry.delete(0, tk.END)
         gen_entry.insert(0, password)
@@ -193,10 +193,13 @@ tk.Label(app, text="Generate Strong Password:", font=("Arial", 12, "bold")).pack
 length_frame = tk.Frame(app)
 length_frame.pack()
 
+# Label for slider
 tk.Label(length_frame, text="Length: ").pack(side="left")
-length_entry = tk.Entry(length_frame, width=5)
-length_entry.insert(0, "")
-length_entry.pack(side="left")
+
+# Password length slider from 4 to 15, default 12
+length_slider = tk.Scale(length_frame, from_=4, to=15, orient=tk.HORIZONTAL, length=150)
+length_slider.set(12)  # default value
+length_slider.pack(side="left")
 
 generate_button = tk.Button(length_frame, text="Generate", command=generate_new_password)
 generate_button.pack(side="left", padx=10)
